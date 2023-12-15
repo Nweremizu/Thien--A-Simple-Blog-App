@@ -34,4 +34,29 @@ This is a simple blog application built with Flask, a lightweight web framework 
    ```
    flask run
    ```
+
+## Features
+
+- **User Authentication:** Users can register, log in, and log out.
+  
+- **Blog Post Management:**
+  - **Rich Text Editor:** Create and edit blog posts using a powerful rich text editor for a seamless content creation experience.
+  - **CRUD Operations:** Perform basic CRUD operations (Create, Read, Update, Delete) on blog posts.
+  
+- **Followers System:**
+  - Users can follow and unfollow other users.
+  - See a feed of posts from users they are following.
+
+- **Responsive Design:** The application is designed to be accessible on various devices.
+
+## Technologies Used
+
+- **Flask:** A lightweight web framework for Python.
+  
+- **Tailwind CSS:** A utility-first CSS framework for building modern and responsive user interfaces.
+
+- **Flask-CKEditor:** Integration of a rich text editor for creating and editing blog posts.
+
+- **Database:** SQLite is used by default. You can modify the `config.py` file to use a different database if needed.
+
    
