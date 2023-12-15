@@ -59,4 +59,11 @@ This is a simple blog application built with Flask, a lightweight web framework 
 
 - **Database:** SQLite is used by default. You can modify the `config.py` file to use a different database if needed.
 
+
+## Acknowledgments
+
+- Flask: [https://flask.palletsprojects.com/](https://flask.palletsprojects.com/)
+- Bootstrap: [https://getbootstrap.com/](https://getbootstrap.com/)
+- Tailwind CSS: [https://tailwindcss.com/](https://tailwindcss.com/)
+
    
