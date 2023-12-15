@@ -1,0 +1,142 @@
+{% extends 'layout/base.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block content %}
+    {% include 'layout/navbar_post.html' %}
+    <div class="bg-white h-screen">
+        <div class="container py-10">
+            <div class="profile">
+                <div class="media flex flex-row gap-4 items-end !px-4 md:!px-20 bg-primary1">
+                    {#     Translate the div below by 5rem with translate-y-20           #}
+                    <div class="flex flex-col w-fit justify-start gap-3 translate-y-32">
+                        <div class="w-40 md:w-48 lg:w-72 p-2  bg-white border-blue-950 border-2 shadow-small">
+                            <img src="{{ current_user.avatar(290) }}" class="object-contain rounded">
+                        </div>
+                        <div>
+                            {% if current_user.id == user.id %}
+                                <a href="#" class="no-underline text-white" data-bs-toggle="modal"
+                                   data-bs-target="#staticBackdrop">
+                                    <div class="flex justify-center align-center border-2 border-dark text-dark py-1 shadow-transparent hover:-translate-y-1 hover:shadow-small duration-700 ">
+                                        Edit Profile
+                                    </div>
+                                </a>
+                            {% elif not current_user.is_following(user) %}
+                                <form action="{{ url_for('follow', user_id=user.id) }}" class="w-full" method="post">
+                                    {{ form.hidden_tag() }}
+                                    {{ form.submit(value="Follow", class="w-full flex justify-center align-center border-2 border-dark text-dark py-1 shadow-transparent hover:-translate-y-1 hover:shadow-small duration-700") }}
+                                </form>
+                            {% else %}
+                                <form action="{{ url_for('follow', user_id=user.id) }}" class="w-full" method="post">
+                                    {{ form.hidden_tag() }}
+                                    {{ form.submit(value="Unfollow", class="w-full flex justify-center bg-red-400 align-center border-2 border-dark text-dark py-1 shadow-transparent hover:-translate-y-1 hover:shadow-small duration-700") }}
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-fit justify-start gap-1 mb-2">
+                        <h1 class="mb-0">{{ user.username }}</h1>
+                        <p class="px-2 mb-0">Last Seen: {{ moment(user.last_seen).fromNow() }}</p>
+                    </div>
+                </div>
+                <div class="flex justify-end md:px-4 py-3">
+                    <ul class="flex flex-row gap-4">
+                        <li class="flex flex-col justify-center items-center">
+                            <h2 class="font-bold text-lg md:text-3xl">{{ user.get_posts_count() }}</h2>
+                            <p class="text-sm">Posts</p>
+                        </li>
+                        <li class="flex flex-col justify-center items-center">
+                            <h2 class="font-bold text-lg md:text-3xl">{{ user.get_followed() }}</h2>
+                            <p class="text-sm">following</p>
+                        </li>
+                        <li class="flex flex-col justify-center items-center">
+                            <h2 class="font-bold text-lg md:text-3xl">{{ user.get_followers() }}</h2>
+                            <p class="text-sm">followers</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="about flex flex-col mb-4 mt-4">
+                <h1>About Me</h1>
+                <div class="bg-amber-100 px-4 py-3 rounded mx-4">
+                    {{ user.about_me|safe }}
+                </div>
+            </div>
+            <div class="activities">
+                <h1>Posts by {{ user.username }}</h1>
+                <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-6">
+                    {% for post in posts %}
+                        <div class="card border-2 border-dark p-2 gap-4 hover:shadow-form hover:-translate-y-0.5 duration-700">
+                            <a href="{{ url_for('post',post_id=post.id) }}" class="text-inherit">
+                                <div>
+                                    <img src="{% if post.image_data == None %}
+                                                {{ post.image_url }}
+                                        {% else %}
+                                                 {{ url_for('display_image', post_id=post.id) }}
+                                        {% endif %}" class="img-fluid rounded">
+                                </div>
+                            </a>
+                            <div class="flex flex-col px-2">
+                                <a href="{{ url_for('post',post_id=post.id) }}" class="text-inherit">
+                                    <h1 class="text-3xl">{{ post.title }}</h1>
+                                    <p>{{ post.subtitle }}</p>
+                                </a>
+                                {% if user.id == current_user.id %}
+                                    <div class="flex w-full justify-between">
+                                        <p class="text-gray-500">{{ moment(post.timestamp).fromNow() }}</p>
+                                        <a href="{{ url_for('delete_post', post_id=post.id) }}"
+                                           class="no-underline text-white">
+                                            <div class="flex justify-center align-center border-2 border-dark px-2 text-dark bg-red-400 py-1 shadow-transparent hover:-translate-y-1 hover:shadow-small duration-700 ">
+                                                Delete Post
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% else %}
+                                    <p class="text-gray-500">{{ moment(post.timestamp).fromNow() }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% if current_user.id == user.id %}
+            {#    Modal for the Edit Profile   #}
+            <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content border-2 border-dark !bg-amber-100">
+                        <div class="modal-header border-b border-dark">
+                            <h1>Edit Profile</h1>
+                        </div>
+                        <div class="">
+                            <form class="px-3 gap-3 my-4" method="post" action="">
+                                {{ ckeditor.config(serve_local=True) }}
+                                <script src="../../static/js/ckeditor/ckeditor.js"></script>
+                                {{ form2.hidden_tag() }}
+                                <div class="w-full">
+                                    {{ form2.username.label(class="form-label") }}
+                                    {{ form2.username(class="p-3 border border-secondary rounded-lg focus:outline-none !w-full", value=user.username) }}
+                                    {% for error in form2.username.errors %}
+                                        <span class="text-red-300 italic text-sm">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div>
+                                    {{ form2.about_me.label(class="form-label") }}
+                                    {{ form2.about_me(class="form-control", value=user.about_me) }}
+                                    {% for error in form2.about_me.errors %}
+                                        <span class="text-red-300 italic text-sm">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="flex justify-center w-full mt-2">
+                                    {{ form2.submit(value="Submit",  class="flex justify-center align-center border-2 border-dark text-dark py-1 shadow-transparent hover:-translate-y-1 hover:shadow-small duration-700 w-full") }}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+    </div>
+{% endblock %}

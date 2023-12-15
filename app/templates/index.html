@@ -1,0 +1,79 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="absolute -z-[1]">
+        <img src="{{ url_for('static' , filename='images/bg/pill.svg') }}" alt="rounded yellow rectangele">
+    </div>
+
+    {% include 'layout/navbar_post.html' %}
+    {% include 'layout/hero.html' %}
+
+    <div class="flex flex-col md:flex-row bg-primary1 py-14 gap-2 lg:!pl-10 ">
+        <div
+                class="posts  md:pl-6 md:pr-32 px-3 flex flex-col md:border-r lg:pl-20 lg:pr-10 border-dark md:justify-center md:items-start items-center lg:w-3/5">
+            <h1 class="text-3xl font-bold text-dark font-['Roboto']">All Posts</h1>
+            {% for post in posts %}
+                <div class="card mb-3 bg-white lg:!bg-transparent lg:!border-0 border-2  border-dark p-2 shadow-transparent transition ease-in-out duration-700 hover:shadow-form hover:-translate-y-1 lg:w-full">
+                    <div class="row g-0 ">
+                        <a href="{{ url_for('post', post_id=post.id) }}" class="flex text-inherit !w-fit">
+                            <div class="col-md-4 !w-fit">
+                                <img src="{% if post.image_data == None %}
+                                                {{ post.image_url }}
+                                        {% else %}
+                                                 {{ url_for('display_image', post_id=post.id) }}
+                                        {% endif %}"
+                                     class="img-fluid lg:!max-w-[250px] rounded !h-full lg:rounded-none !object-cover"
+                                     alt="...">
+                            </div>
+                        </a>
+                            <div class="col-md-8 !w-full lg:!w-3/5">
+                                <div class="card-body">
+                                    <div class="flex flex-row gap-3 mb-2">
+                                        <!-- Tag Design -->
+                                        <div class="tag">
+                                            {{ post.tag.name }}
+                                        </div>
+                                    </div>
+                                    <a href="{{ url_for('post', post_id=post.id) }}" class="text-inherit !w-fit mb-2">
+                                        <h5 class="card-title xl:text-4xl text-2xl font-bold flex-wrap flex">{{ post.title }}</h5>
+                                        <p class="card-text flex w-full mb-2">{{ post.subtitle }}</p>
+                                    </a>
+                                    <a href="{{ url_for('profile', user_id=post.fetch_author().id) }}" class="flex text-inherit">
+                                        <div class="flex flex-row gap-2 author">
+                                            <img src="{{ post.author_avatar() }}" alt=""
+                                                 width="50"
+                                                 class="img-fluid rounded-circle mb-3 img-thumbnail border-2 border-dark !p-0.5">
+                                            <div class="flex flex-col">
+                                                {# Author #}
+                                                <span class="font-bold">{{ post.get_author() }}</span>
+                                                {# Date #}
+                                                <span class="font-light">{{ moment(post.timestamp).fromNow() }}</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+        <div class="tags lg:w-1/4 hidden md:flex px-4">
+            <div class="flex flex-col gap-6">
+                <h1 class="text-2xl font-['Roboto'] font-bold">Recommend Topics</h1>
+                <div class="flex gap-2 flex-wrap">
+                    {% for tag in tags %}
+                        <a href="{{ url_for('post_by_tags', tag_name=tag.name) }}" class="text-inherit">
+                            <div class="Topics px-3 py-2 bg-white rounded-3xl justify-center items-center flex">
+                                {{ tag.name }}
+                            </div>
+                        </a>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

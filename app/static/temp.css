@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600,700|Roboto:400,500,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* all font weghits of roboto and open sans */
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+.form-header {
+    font-family: "Roboto", sans-serif;
+    @apply text-5xl font-bold text-center text-gray-700;
+}
+
+.forms-holder {
+    @apply flex flex-col items-center justify-center my-9 w-full gap-2;
+}
+
+.comic-button {
+    @apply bg-primary shadow-form text-dark font-semibold text-2xl py-3 px-4 mt-4 w-full hover:shadow-transparent transition-all duration-700 ease-in-out;
+}
+
+.profile-pic {
+    @apply rounded-full h-12 w-12 border p-[3px] border-dark flex items-center justify-center;
+}
+
+.profile-pic-small {
+    @apply rounded-full w-7 h-7  xl:h-12 xl:w-12 border-2 p-[1px] border-dark flex items-center justify-center;
+}
+
+.tag {
+    @apply flex justify-center items-center px-5 py-1 text-xs bg-dark text-white rounded-full 2xl:text-sm;
+}
+
+.profile-pic-big {
+    @apply rounded-full h-14 w-14 border p-[3px] border-dark flex items-center justify-center;
+}
+
+.red-bg {
+    @apply bg-red-200;
+}
+
+.blue-bg {
+    @apply bg-blue-200;
+}
+
+.green-bg {
+    @apply bg-green-200;
+}
+
+.red-text {
+    @apply text-red-400;
+}
+
+.blue-text {
+    @apply text-blue-400;
+}
+
+.green-text {
+    @apply text-green-400;
+}

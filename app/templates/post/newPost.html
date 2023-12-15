@@ -1,0 +1,60 @@
+{% extends 'layout/base.html' %}
+{% block title %}New Write Up{% endblock %}
+{% block content %}
+    {% include 'layout/navbar_post.html' %}
+    <div class="h-fit bg-primary1 pb-14">
+        <div class="flex flex-col justify-center items-center h-full px-8">
+            <h1 class="text-5xl text-white mb-4 font-extralight mt-8">New Write Up</h1>
+            <div class="border border-dark rounded-xl p-6">
+                <form method="POST" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    {{ ckeditor.config(serve_local=True) }}
+                    {# load the ckeditor from an local directory #}
+                    <script src="../../static/js/ckeditor/ckeditor.js"></script>
+                    <div class="flex flex-col items-center py-4">
+                        <div class="flex flex-col w-full mb-4">
+                            {{ form.title(class="text-2xl border-b border-dark p-2 w-full bg-transparent") }}
+                            {% for error in form.title.errors %}
+                                <p class="text-red-500">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        <div class="flex flex-col w-full mb-4">
+                            {{ form.subtitle(class="text-2xl border-b border-dark p-2 w-full bg-transparent") }}
+                            {% for error in form.subtitle.errors %}
+                                <p class="text-red-500">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        <div class="flex flex-col w-full mb-4">
+                            {{ form.tags(class="text-2xl border-b border-dark p-2 w-full bg-transparent") }}
+                            {% for error in form.tags.errors %}
+                                <p class="text-red-500">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        <div class="flex flex-col w-full mb-4">
+                            {{ form.image_url(class="text-2xl border-b border-dark p-2 w-full bg-transparent") }}
+                            {% for error in form.image_url.errors %}
+                                <p class="text-red-500">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        <div class="flex flex-col w-full mb-4">
+                            {{ form.image(class="text-2xl border-b border-dark p-2 w-full bg-transparent") }}
+                            {% for error in form.image.errors %}
+                                <p class="text-red-500">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        <div class="flex flex-col justify-center items-start mb-4">
+                            {{ form.post.label }}
+                            {{ form.post(class="border border-dark rounded-xl p-2 w-96") }}
+                            {% for error in form.post.errors %}
+                                <p class="text-red-500">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        <div class="flex flex-col w-full mb-4">
+                            {{ form.submit(class="text-2xl w-full py-2 bg-green-300 shadow-transparent hover:shadow-form transition-all duration-500 ease-in-out") }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

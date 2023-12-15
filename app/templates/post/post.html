@@ -1,0 +1,52 @@
+{% extends 'layout/base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    {% include 'layout/navbar.html' %}
+    <div class="relative mb-0 overflow-hidden p-0 bg-primary1">
+        <div
+                class="flex flex-col lg:flex-row p-4 md:p-2 lg:p-0 items-center relative  max-w-[1240px] mx-auto lg:gap-0 gap-10">
+            <div class="md:p-6 lg:py-[70px]  lg:w-full max-w-[800px]">
+                <div class="dd-hero-large-art">
+                    <div class="dd-hero-shot relative">
+                        <img class="" src="
+                            {% if post.image_data == None %}
+                                {{ post.image_url }}
+                            {% else %}
+                                {{ url_for('display_image', post_id=post.id) }}
+                            {% endif %}
+                                ">
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center items-center px-10 lg:px-2 py-10">
+                <header class="flex flex-col gap-3 lg:px-6">
+                    <div class="flex">
+                        <div class="tag">
+                            {{ post.tag.name }}
+                        </div>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl lg:text-6xl font-bold leading-relaxed">{{ post.title }}</h1>
+                    <p class="font-medium">
+                        by {{ post.get_author() }}
+                        <br>
+                        <span class="date text-white opacity-70">
+                            {{ moment(post.timestamp).fromNow() }}
+                        </span>
+                    </p>
+                    <a href="{{ url_for('profile', user_id=post.fetch_author().id) }}" class="flex text-inherit !w-fit">
+                        <div class="profile-pic-big">
+                            <img src="{{ post.author_avatar() }}" alt=""
+                                 class="object-contain rounded-full">
+                        </div>
+                    </a>
+                </header>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-center items-center post-content py-8">
+        <div class="post-content drop lg:w-1/2 px-3 lg:px-0 gap-8">
+            {{ post.body | safe }}
+        </div>
+    </div>
+{% endblock %}
+```

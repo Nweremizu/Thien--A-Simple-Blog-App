@@ -1,0 +1,50 @@
+{% extends 'layout/base_auth.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    <div class="flex justify-center items-center h-full">
+        <div class="background">
+            <div class="blob"></div>
+            <div class="blob"></div>
+        </div>
+
+        <div class="border border-secondary px-14 py-10 lg:w-3/5 xl:w-1/3 z-10 bg-white">
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <h1 class="form-header">Welcome Back</h1>
+                <div class="forms-holder">
+                    <div class="flex flex-col w-full gap-2">
+                        {{ form.username.label(class="text-sm") }}
+                        {{ form.username(class="p-4 border border-secondary rounded-lg focus:outline-none") }}
+                        {% for error in form.username.errors %}
+                            <span class="text-red-300 italic text-sm">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="flex flex-col w-full gap-2">
+                        {{ form.password.label(class="text-sm") }}
+                        {{ form.password(class="p-4 border border-secondary rounded-lg focus:outline-none") }}
+                        {% for error in form.password.errors %}
+                            <span class="text-red-300 italic text-sm">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="w-full">
+                        {{ form.submit(class="comic-button") }}
+                    </div>
+                    <div class="flex justify-between w-full mt-2">
+                        <div>
+                            {{ form.remember_me(class="mr-1") }}
+                            {{ form.remember_me.label() }}
+                        </div>
+                        <a href="{{ url_for('reset_password_request') }}" class="text-sm text-secondary hover:text-primary">Forgot
+                            Password?</a>
+                    </div>
+                    <div class="flex justify-center w-full mt-2">
+                        <p class="text-sm"> Don't have an account? <a href="{{ url_for('register') }}"
+                                                                        class="text-sm text-secondary hover:text-primary">Sign Up
+                        </a></p>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

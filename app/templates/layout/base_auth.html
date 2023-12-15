@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='authBg.css') }}">
+    {#  TailWind CDN  #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='output/main.css') }}">
+</head>
+<body class="h-screen">
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class=" p-2 relative z-10 flex justify-center items-center ">
+            <div class="flex py-4 px-8 {{ color }}-bg z-[1] border border-dark rounded-xl w-3/4">
+
+                <ul class="list-disc">
+                    {% for message in messages %}
+                        <li class="{{ color }}-text">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+{% endwith %}
+
+
+{% block content %}{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+</body>
+</html>
