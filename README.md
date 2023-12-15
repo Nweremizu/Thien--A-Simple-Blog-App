@@ -2,6 +2,7 @@
 
 This is a simple blog application built with Flask, a lightweight web framework for Python. The application allows users to create, read, update, and delete blog posts.
 
+
 ## Features
 
 - User Authentication: Users can register, log in, and log out.
@@ -59,6 +60,10 @@ This is a simple blog application built with Flask, a lightweight web framework 
 
 - **Database:** SQLite is used by default. You can modify the `config.py` file to use a different database if needed.
 
+
+## Configuration
+
+- **Database Configuration:** The application uses SQLite by default. You can modify the config.py file to use a different database.
 
 ## Acknowledgments
 
