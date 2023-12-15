@@ -65,6 +65,10 @@ This is a simple blog application built with Flask, a lightweight web framework 
 
 - **Database Configuration:** The application uses SQLite by default. You can modify the config.py file to use a different database.
 
+## Contributing
+
+- Contributions are welcome! If you find any issues or have suggestions for improvements, please create an issue or submit a pull request.
+
 ## Acknowledgments
 
 - Flask: [https://flask.palletsprojects.com/](https://flask.palletsprojects.com/)
