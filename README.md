@@ -17,16 +17,21 @@ This is a simple blog application built with Flask, a lightweight web framework 
    cd flask-blog-app```
 
 2. Create a virtual environment and install dependencies:
-   ```python -m venv venv
-      source venv/bin/activate  # On Windows, use 'venv\Scripts\activate'
-      pip install -r requirements.txt```
+   ```
+   python -m venv venv
+   source venv/bin/activate  # On Windows, use 'venv\Scripts\activate'
+   pip install -r requirements.txt```
 
 3. Set Up The Database
     <!-- Note this is to be done in the terminal  -->
-   ```flask db init
-      flask db migrate
-      flask db upgrade```
+   ```
+   flask db init
+   flask db migrate
+   flask db upgrade
+   ```
    
 4. Run The Application
-     ```flask run```
+   ```
+   flask run
+   ```
    
