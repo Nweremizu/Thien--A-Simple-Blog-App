@@ -1,3 +1,4 @@
+![Thien](https://github.com/Nweremizu/Thien--A-Simple-Blog-App/blob/main/app/static/images/icons/logo.svg)
 # Thien -- A Simple Flask Blog Application
 
 This is a simple blog application built with Flask, a lightweight web framework for Python. The application allows users to create, read, update, and delete blog posts.
