@@ -25,6 +25,7 @@ moment = Moment(app)  # time and date formatting
 
 def setup_logging():
     with app.app_context():
+
         if not app.debug:
             # In production mode, add log handler to sys.stderr.
             app.logger.addHandler(logging.StreamHandler())
