@@ -37,6 +37,7 @@ body{
 	border-radius: 50%;
 }
 
+
 .blob:first-child {
 	background: linear-gradient(#fee58b, #fee58b);
 	left: 190px;
@@ -78,3 +79,4 @@ input[type="checkbox"]:checked {
 	/* Your styles for the checked state here */
 	background-color: #fee58b; /* Change this to the color you want for the checked state */
 }
+
