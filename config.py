@@ -4,7 +4,7 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # Define the config class
-class Config(object, ):
+class Config(object):
     # Defines the configuration variables
     # Secret key for the application
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'

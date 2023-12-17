@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_ckeditor import CKEditor, CKEditorField
 from flask_moment import Moment
+import logging
 
 app = Flask(__name__)
 
@@ -22,3 +23,5 @@ app.config['CKEDITOR_PKG_TYPE'] = 'full'
 moment = Moment(app)  # time and date formatting
 
 from app import routes, models, errors
+
+
