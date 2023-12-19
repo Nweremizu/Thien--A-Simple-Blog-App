@@ -1,4 +1,6 @@
 from flask import Flask
+from flask_mail import Mail
+
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -21,6 +23,7 @@ ckeditor = CKEditor(app)  # rich text editor
 app.config['CKEDITOR_SERVE_LOCAL'] = True
 app.config['CKEDITOR_PKG_TYPE'] = 'full'
 moment = Moment(app)  # time and date formatting
+mail = Mail(app)  # email support
 
 
 def setup_logging():
