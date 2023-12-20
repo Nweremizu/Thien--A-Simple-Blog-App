@@ -39,6 +39,6 @@ def create_tables():
     with app.app_context():
         db.create_all()
 
-from app import routes, models, errors
+from app import routes, models, errors, email
 
 

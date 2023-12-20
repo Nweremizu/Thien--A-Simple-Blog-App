@@ -40,6 +40,7 @@ def cleanup_unused_tags():
 def index():
     posts = Post.query.order_by(Post.timestamp.desc()).all()
     tags = Tag.query.all()
+    cleanup_unused_tags()
     return render_template('index.html', title='Home', posts=posts, tags=tags)
 
 
@@ -83,11 +84,16 @@ def reset_password_request():
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
+        print("Reset Password Requested for User:", user)
         if user:
             send_password_reset_email(user)
+        else:
+            flash("Email not found")
+            return redirect(url_for('reset_password_request'))
+
         flash('Check your email for the instructions to reset your password.')
         return redirect(url_for('login'))
-    return render_template('auth/reset.html', title="Reset Password", form=form)
+    return render_template('auth/reset.html', title="Reset Password", form=form, color='red')
 
 
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])

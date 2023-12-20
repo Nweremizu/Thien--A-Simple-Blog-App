@@ -27,7 +27,7 @@
                                     {{ form.submit(value="Follow", class="w-full flex justify-center align-center border-2 border-dark text-dark py-1 shadow-transparent hover:-translate-y-1 hover:shadow-small duration-700") }}
                                 </form>
                             {% else %}
-                                <form action="{{ url_for('follow', user_id=user.id) }}" class="w-full" method="post">
+                                <form action="{{ url_for('unfollow', user_id=user.id) }}" class="w-full" method="post">
                                     {{ form.hidden_tag() }}
                                     {{ form.submit(value="Unfollow", class="w-full flex justify-center bg-red-400 align-center border-2 border-dark text-dark py-1 shadow-transparent hover:-translate-y-1 hover:shadow-small duration-700") }}
                                 </form>
