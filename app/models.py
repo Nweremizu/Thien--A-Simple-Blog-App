@@ -110,7 +110,7 @@ class Post(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     image_data = db.Column(db.LargeBinary)
-    image_url = db.Column(db.String(100),
+    image_url = db.Column(db.String(200),
                           default='http://www.palmares.lemondeduchiffre.fr/images/joomlart/demo/default.jpg')
     tag_id = db.Column(db.Integer, db.ForeignKey('tag.id'))
     tag = db.relationship('Tag', back_populates='posts')

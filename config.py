@@ -44,7 +44,7 @@ class Config(object):
 
     # Email server configuration
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
-    MAIL_PORT = int(os.environ.get('MAIL_PORT'))
+    MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25) 
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
