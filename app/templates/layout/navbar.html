@@ -7,80 +7,78 @@
         <div class="flex flex-row gap-10 items-center justify-center">
 
             {% if post.fetch_author().id == current_user.id %}
-                <a id="edit" class="text-inherit" href="{{ url_for('edit_post', post_id=post.id) }}">
-                    <div class="md:flex flex-row items-center gap-2 hidden bg-green-300 px-4 py-1 border border-dark shadow-transparent hover:shadow-form transition-all duration-500 ease-in-out">
-                        <p class="cursor-pointer mb-0">Edit Profile</p>
-                    </div>
-                </a>
-                <a id="delete" href="{{ url_for('delete_post', post_id=post.id) }}" class="text-inherit">
-                    <div class="md:flex flex-row items-center gap-2 hidden bg-red-300 px-4 py-1 border border-dark shadow-transparent hover:shadow-form transition-all duration-500 ease-in-out">
-                        <p class="cursor-pointer mb-0">Delete</p>
-                    </div>
-                </a>
+            <a id="edit" class="text-inherit" href="{{ url_for('edit_post', post_id=post.id) }}">
+                <div
+                    class="md:flex flex-row items-center gap-2 hidden bg-green-300 px-4 py-1 border border-dark shadow-transparent hover:shadow-form transition-all duration-500 ease-in-out">
+                    <p class="cursor-pointer mb-0">Edit Post</p>
+                </div>
+            </a>
+            <a id="delete" href="{{ url_for('delete_post', post_id=post.id) }}" class="text-inherit">
+                <div
+                    class="md:flex flex-row items-center gap-2 hidden bg-red-300 px-4 py-1 border border-dark shadow-transparent hover:shadow-form transition-all duration-500 ease-in-out">
+                    <p class="cursor-pointer mb-0">Delete</p>
+                </div>
+            </a>
             {% elif request.path != "/new_post" %}
-                <a href="{{ url_for('create_post') }}" class="no-underline">
-                    <div class="md:flex flex-row items-center gap-2 hidden ">
-                        <img src="{{ url_for('static', filename='images/icons/pens.svg') }}" width="20px">
-                        <p class="cursor-pointer text-black mb-0">Write</p>
-                    </div>
-                </a>
+            <a href="{{ url_for('create_post') }}" class="no-underline">
+                <div class="md:flex flex-row items-center gap-2 hidden ">
+                    <img src="{{ url_for('static', filename='images/icons/pens.svg') }}" width="20px">
+                    <p class="cursor-pointer text-black mb-0">Write</p>
+                </div>
+            </a>
             {% else %}
-                <a id="publish">
-                    <div class="md:flex flex-row items-center gap-2 hidden bg-green-300 px-4 py-1 border border-dark shadow-transparent hover:shadow-form transition-all duration-500 ease-in-out">
-                        <p class="cursor-pointer mb-0">Publish</p>
-                    </div>
-                </a>
+            <a id="publish">
+                <div
+                    class="md:flex flex-row items-center gap-2 hidden bg-green-300 px-4 py-1 border border-dark shadow-transparent hover:shadow-form transition-all duration-500 ease-in-out">
+                    <p class="cursor-pointer mb-0">Publish</p>
+                </div>
+            </a>
             {% endif %}
             <div class="flex flex-row justify-center items-center gap-1 profile-pic-link">
                 <div class="profile-pic">
-                    <img src="{{ current_user.avatar(120) }}" alt="profile pic"
-                         class="object-contain rounded-full">
+                    <img src="{{ current_user.avatar(120) }}" alt="profile pic" class="object-contain rounded-full">
                 </div>
                 <svg class=" xl:block -mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
-                     aria-hidden="true">
+                    aria-hidden="true">
                     <path fill-rule="evenodd"
-                          d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                          clip-rule="evenodd"/>
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd" />
                 </svg>
             </div>
         </div>
         <div class="menu hidden absolute border border-dark right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+            role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
             <div role="none">
                 <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
                 <a href="{{ url_for('profile', user_id=current_user.id) }}"
-                   class="text-gray-700 border-b border-dark block px-4 py-2 text-sm hover:bg-primary hover:text-white rounded-t-md"
-                   role="menuitem"
-                   tabindex="-1"
-                   id="menu-item-0">Profile</a>
+                    class="text-gray-700 border-b border-dark block px-4 py-2 text-sm hover:bg-primary hover:text-white rounded-t-md"
+                    role="menuitem" tabindex="-1" id="menu-item-0">Profile</a>
                 <a href="{{ url_for('create_post') }}"
-                   class="text-gray-700  border-b border-dark block px-4 py-2 text-sm hover:bg-primary hover:text-white"
-                   role="menuitem"
-                   tabindex="-1"
-                   id="menu-item-1">Write</a>
+                    class="text-gray-700  border-b border-dark block px-4 py-2 text-sm hover:bg-primary hover:text-white"
+                    role="menuitem" tabindex="-1" id="menu-item-1">Write</a>
                 {% if post.fetch_author().id == current_user.id %}
-                    <a id="edit" class="text-inherit" href="{{ url_for('edit_post', post_id=post.id) }}">
-                        <div class="text-gray-700  border-b border-dark bg-green-200 block px-4 py-2 text-sm hover:bg-green-400 hover:text-white">
-                            <p class="cursor-pointer mb-0">Edit Profile</p>
-                        </div>
-                    </a>
-                    <a id="delete" href="{{ url_for('delete_post', post_id=post.id) }}" class="text-inherit">
-                        <div class="text-gray-700  border-b border-dark bg-red-200 block px-4 py-2 text-sm hover:bg-red-400 hover:text-white">
-                            <p class="cursor-pointer mb-0">Delete</p>
-                        </div>
-                    </a>
+                <a id="edit" class="text-inherit" href="{{ url_for('edit_post', post_id=post.id) }}">
+                    <div
+                        class="text-gray-700  border-b border-dark bg-green-200 block px-4 py-2 text-sm hover:bg-green-400 hover:text-white">
+                        <p class="cursor-pointer mb-0">Edit Profile</p>
+                    </div>
+                </a>
+                <a id="delete" href="{{ url_for('delete_post', post_id=post.id) }}" class="text-inherit">
+                    <div
+                        class="text-gray-700  border-b border-dark bg-red-200 block px-4 py-2 text-sm hover:bg-red-400 hover:text-white">
+                        <p class="cursor-pointer mb-0">Delete</p>
+                    </div>
+                </a>
                 {% endif %}
                 {% if not current_user.is_authenticated %}
-                    <a href="#"
-                       class="text-gray-700  border-b border-dark bg-red-200 block px-4 py-2 text-sm hover:bg-red-400 hover:text-white"
-                       role="menuitem" tabindex="-1"
-                       id="menu-item-2">Delete</a>
+                <a href="#"
+                    class="text-gray-700  border-b border-dark bg-red-200 block px-4 py-2 text-sm hover:bg-red-400 hover:text-white"
+                    role="menuitem" tabindex="-1" id="menu-item-2">Delete</a>
                 {% endif %}
                 <form method="POST" action="{{ url_for('logout') }}" role="none" class="block">
                     <button type="submit"
-                            class="text-red-400 hover:bg-red-500 rounded-b-md hover:text-white block border-red-500 w-full px-4 py-2 text-left text-sm"
-                            role="menuitem"
-                            tabindex="-1" id="menu-item-3">Sign out
+                        class="text-red-400 hover:bg-red-500 rounded-b-md hover:text-white block border-red-500 w-full px-4 py-2 text-left text-sm"
+                        role="menuitem" tabindex="-1" id="menu-item-3">Sign out
                     </button>
                 </form>
             </div>
